@@ -1,26 +1,23 @@
-mkdir -p work/tools
-mv qrouter-1.4.59.tgz work/tools/.
-mv magic-8.2.172.tgz work/tools/.
-mv netgen-1.5.134.tgz work/tools/.
-mv qflow-1.3.17.tgz work/tools/.
-cd work/tools
+sudo apt-get update
+mkdir tools
+cd tools/
 sudo apt-get install build-essential bison flex \
 	libreadline-dev gawk tcl-dev tk-dev libffi-dev git \
 	graphviz xdot pkg-config python3 --assume-yes
 sudo apt install libglu1-mesa-dev freeglut3-dev --assume-yes
-wget "https://github.com/Kitware/CMake/releases/download/v3.13.0/cmake-3.13.0.tar.gz"
-tar -xvzf cmake-3.13.0.tar.gz
-cd cmake-3.13.0/
-sudo ./bootstrap --prefix=/usr/local
-sudo make -j$(nproc)
-sudo make install 
+wget "https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3.tar.gz"
+tar -xvzf cmake-3.22.3.tar.gz
+cd cmake-3.22.3/
+sudo ./bootstrap && make && sudo make install
 cd ../
 wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
 sudo apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main" -y 
 sudo apt-get update 
 sudo apt-get install -y clang-6.0 --assume-yes
 sudo apt-get install gsl-bin libgsl0-dev --assume-yes
-sudo add-apt-repository ppa:saltmakrell/ppa -y 
+
+#sudo add-apt-repository ppa:saltmakrell/ppa -y 
+
 sudo apt-get update
 sudo apt-get install yosys --assume-yes
 git clone https://github.com/rubund/graywolf.git
